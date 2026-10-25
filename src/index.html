@@ -37,7 +37,7 @@
 
         <div class="flex flex-wrap items-center gap-4">
             <span class="font-bold">Safi → Marrakech</span>
-            <span class="bg-blue-100 ">
+            <span>
                 80 DH / place
             </span>
         </div>
@@ -53,10 +53,52 @@
     <span class="w-4 h-4 rounded-full bg-purple-400"></span>
     <span>Occupé</span>
      </div>
-
     </div>
-
     </section>
+
+
+<section class="formulaires">
+
+  <form class="carte bg-blue-950 text-white border-blue-500" id="formReserver">
+    <h2>Réserver une place</h2>
+
+    <label>Passager</label>
+    <input class="champ bg-blue-900 text-white" type="text" id="nomReserver" placeholder="Ex : Thomas Martin">
+
+    <label>Siège sélectionné</label>
+    <select class="champ bg-blue-900 text-white" id="siegeReserver">
+      <option value="">-- Choisir un siège --</option>
+    </select>
+
+    <button class="bouton bg-blue-600 text-white" type="submit">Confirmer</button>
+  </form>
+
+  <form class="carte bg-blue-950 text-white border-blue-500" id="formModifier">
+    <h2>Modifier une place</h2>
+
+    <label>Passager existant</label>
+    <select class="champ bg-blue-900 text-white" id="passagerModifier">
+    <option value="">-- Choisir un passager --</option>
+    </select>
+
+    <label>Nouveau nom</label>
+    <input class="champ bg-blue-900 text-white" type="text" id="nouveauNom">
+
+    <button class="bouton bg-blue-600 text-white" type="submit">Modifier</button>
+  </form>
+
+  <form class="carte bg-blue-950 text-white border-blue-500" id="formAnnuler">
+    <h2>Annuler une réservation</h2>
+
+    <label>Passager</label>
+    <select class="champ bg-blue-900 text-white" id="passagerAnnuler">
+    <option value="">-- Choisir un passager --</option>
+    </select>
+
+    <button class="bouton bg-red-600 text-white" type="submit">Annuler</button>
+  </form>
+
+</section>
 
        
     </main>
