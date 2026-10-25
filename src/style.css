@@ -1,0 +1,41 @@
+*{
+    box-sizing: border-box;
+    margin:0;
+    padding: 0;
+}
+
+
+
+.navbar{
+    background-color: #09339e;
+    display:flex ;
+    align-items: center;
+    justify-content: space-between;
+   
+
+
+
+}
+
+.icon {
+display: flex;
+gap: 10px;
+padding: 10px 20px;
+}
+
+.navbar span {
+    font-size: 21px;
+    font-weight:bold;
+    padding: 10px;;
+}
+
+ .btn_nav{
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    cursor: pointer;
+    font-weight:bold;
+    font-size:21px;
+
+    
+ }
