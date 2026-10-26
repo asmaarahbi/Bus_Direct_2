@@ -10,10 +10,12 @@ const passagerAnnuler = document.getElementById("passagerAnnuler");
 let reservations = [];
 
 
+
+
 function remplirliste() {
   seatSelect.innerHTML = '<option value="">-- Choisir un siège --</option>';
   passagerAnnuler.innerHTML = '<option value="">-- Choisir un passager --</option>';
-
+  passagerAnnuler.innerHTML =  '<option value="">--Choisir un passager--</option>';
   for (let i = 1; i <= 20; i++) {
     let occup = false;
 
@@ -25,11 +27,14 @@ function remplirliste() {
 
     if (occup === false) {
       seatSelect.innerHTML += '<option value="' + i + '">' + i + "</option>";
+      siegeModifier.innerHTML+='<option value="'+ i +'">'+i+"</option>";
     }
   }
 
   for (let j = 0; j < reservations.length; j++) {
-    passagerAnnuler.innerHTML += '<option value="' + reservations[j].nom + '">' + reservations[j].nom + "</option>";
+    const options= '<option value="' + reservations[j].nom + '">' + reservations[j].nom + "</option>";
+    passagerModifier.innerHTML+=options;
+    passagerAnnuler.innerHTML+=options;
   }
 }
 
@@ -69,7 +74,7 @@ function afficher() {
 }
 
 
-// Partie réservation
+// Partie réservation//
 formulaire1.addEventListener("submit", function (event) {
   event.preventDefault();
 
@@ -128,3 +133,40 @@ formAnnuler.addEventListener("submit", function (event) {
 
 
 afficher();
+
+
+formModifier.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  const ancienNom = passagerModifier.value;
+  const nomNouveau = nouveauNom.value.trim();
+  let numero = Number(siegeModifier.value);
+
+  if (ancienNom === "") {
+    alert("Veuillez choisir un passager");
+    return;
+  }
+
+  if (nomNouveau === "" && numero === 0) {
+    alert("Entrez un nouveau nom ou choisissez un nouveau siège");
+    return;
+  
+  
+
+  }
+  for (let i = 0; i < reservations.length; i++) {
+    if (reservations[i].nom.toLowerCase() === ancienNom.toLowerCase()) {
+      if(nomNouveau !==""){
+        reservations[i].nom = nomNouveau;
+      }
+    if(numero!== 0){
+      reservations[i].siege=numero;
+    }
+
+  }
+ 
+}
+afficher()
+alert("Modification réussie !")
+formModifier.reset()
+})
