@@ -16,6 +16,7 @@
     --color-blue-800: oklch(42.4% 0.199 265.638);
     --color-blue-900: oklch(37.9% 0.146 265.522);
     --color-blue-950: oklch(28.2% 0.091 267.935);
+    --color-violet-300: oklch(81.1% 0.111 293.571);
     --color-purple-400: oklch(71.4% 0.203 305.504);
     --color-white: #fff;
     --spacing: 0.25rem;
@@ -248,6 +249,9 @@
   }
   .bg-red-600 {
     background-color: var(--color-red-600);
+  }
+  .bg-violet-300 {
+    background-color: var(--color-violet-300);
   }
   .font-bold {
     --tw-font-weight: var(--font-weight-bold);
