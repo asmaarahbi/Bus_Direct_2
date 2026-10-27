@@ -18,7 +18,8 @@ function enregister(){
 function remplirliste() {
   seatSelect.innerHTML = '<option value="">-- Choisir un siège --</option>';
   passagerAnnuler.innerHTML = '<option value="">-- Choisir un passager --</option>';
-  passagerAnnuler.innerHTML =  '<option value="">--Choisir un passager--</option>';
+  passagerModifier.innerHTML =  '<option value="">--Choisir un passager--</option>';
+  siegeModifier.innerHTML='<option value="">-- Choisir un siège --</option>';
   for (let i = 1; i <= 20; i++) {
     let occup = false;
 
