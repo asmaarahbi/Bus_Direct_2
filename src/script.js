@@ -6,10 +6,18 @@ const seatSelect = document.getElementById("siegeReserver");
 
 const formAnnuler = document.getElementById("formAnnuler");
 const passagerAnnuler = document.getElementById("passagerAnnuler");
+const passagerModifier =document.getElementById("passagerModifier");
+const siegeModifier = document.getElementById("siegeModifier");
+let reservations = [];
+const nouveauNom = document.getElementById("nouveauNom");
 
-let reservations = JSON.parse(localStorage.getItem("reservations"))||[];
 function enregister(){
-  localStorage.setItem("reservation",JSON.stringify(reservations));
+  localStorage.setItem("reservations",JSON.stringify(reservations));
+}
+function getItem(){
+  const got = localStorage.getItem("reservations")
+  if(got !== null)
+    reservations = JSON.parse(got);
 }
 
 
@@ -35,6 +43,7 @@ function remplirliste() {
     }
   }
 
+
   for (let j = 0; j < reservations.length; j++) {
     const options= '<option value="' + reservations[j].nom + '">' + reservations[j].nom + "</option>";
     passagerModifier.innerHTML+=options;
@@ -59,7 +68,7 @@ function afficher() {
   for (let j = 0; j < reservations.length; j++) {
     const div = document.querySelector('[data-seat="' + reservations[j].siege + '"]');
     div.classList.remove("bg-blue-800");
-    div.classList.add("bg-violet-300");
+    div.classList.add("bg-violet-600");
 
     let numero = reservations[j].siege;
     if (numero < 10) {
@@ -73,10 +82,8 @@ function afficher() {
   document.getElementById("libres").textContent = 20 - occupes;
   document.getElementById("occupes").textContent = occupes;
   document.getElementById("chiffre").textContent = occupes * prix_siege;
-  enregister();
   remplirliste();
 }
-
 
 // Partie réservation//
 formulaire1.addEventListener("submit", function (event) {
@@ -105,12 +112,15 @@ formulaire1.addEventListener("submit", function (event) {
   reservations.push({
     siege: numero,
     nom: nomPassager
+    
   });
-  
+
+  enregister();
   afficher();
   alert("Réservation réussie !");
   formulaire1.reset();
 });
+
 
 
 // Partie annulation
@@ -129,7 +139,7 @@ formAnnuler.addEventListener("submit", function (event) {
       reservations.splice(i, 1);
     }
   }
-
+enregister();
   afficher();
   alert("Réservation annulée !");
   formAnnuler.reset();
@@ -146,10 +156,12 @@ formModifier.addEventListener("submit", function (event) {
   const nomNouveau = nouveauNom.value.trim();
   let numero = Number(siegeModifier.value);
 
+
   if (ancienNom === "") {
     alert("Veuillez choisir un passager");
     return;
   }
+ 
 
   if (nomNouveau === "" && numero === 0) {
     alert("Entrez un nouveau nom ou choisissez un nouveau siège");
@@ -165,13 +177,18 @@ formModifier.addEventListener("submit", function (event) {
       }
     if(numero!== 0){
       reservations[i].siege=numero;
-    }
-
+    } 
+      
+  }
   }
  
-}
-afficher()
+
+  
+ 
+
+
 alert("Modification réussie !")
 formModifier.reset()
 })
+getItem();
 afficher();
