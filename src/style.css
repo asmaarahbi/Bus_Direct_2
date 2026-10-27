@@ -12,7 +12,7 @@ body{
 
 
 .navbar{
-    background-color: white;
+    background-color:rgb(91, 103, 170);
     display:flex ;
     align-items: center;
     justify-content: space-between;
