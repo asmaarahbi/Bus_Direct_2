@@ -100,11 +100,13 @@ padding: 10px 20px;
 
 
 .bus {
-  width: 350px;
+  width: 495px;
   height: 350px;
-  margin: 20px;
   padding: 15px;
-  border-radius: 15px;
+  margin-top: 16px;
+  border-radius: 16px;
+  margin-bottom: 16px;
+
 }
 
 .sieges {
