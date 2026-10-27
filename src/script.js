@@ -54,7 +54,7 @@ function remplirliste() {
 
 function afficher() {
   for (let i = 1; i <= 20; i++) {
-    const div = document.querySelector('[data-seat="' + i + '"]');
+    let div = document.querySelector('[data-seat="' + i + '"]');
     div.classList.remove("bg-violet-300");
     div.classList.add("bg-blue-800");
 
@@ -66,9 +66,9 @@ function afficher() {
   }
 
   for (let j = 0; j < reservations.length; j++) {
-    const div = document.querySelector('[data-seat="' + reservations[j].siege + '"]');
+    let div = document.querySelector('[data-seat="' + reservations[j].siege + '"]');
     div.classList.remove("bg-blue-800");
-    div.classList.add("bg-violet-600");
+    div.classList.add("bg-violet-300");
 
     let numero = reservations[j].siege;
     if (numero < 10) {
@@ -179,6 +179,10 @@ formModifier.addEventListener("submit", function (event) {
       reservations[i].siege=numero;
     } 
       
+  }
+  if(reservations[i].nom.toLowerCase()===nomNouveau.toLowerCase()){
+    alert("Nom déja existé , veuillez choisir un nouveau nom!")
+    return;
   }
   }
  
