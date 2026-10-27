@@ -7,7 +7,10 @@ const seatSelect = document.getElementById("siegeReserver");
 const formAnnuler = document.getElementById("formAnnuler");
 const passagerAnnuler = document.getElementById("passagerAnnuler");
 
-let reservations = [];
+let reservations = JSON.parse(localStorage.getItem("reservations"))||[];
+function enregister(){
+  localStorage.setItem("reservation",JSON.stringify(reservations));
+}
 
 
 
@@ -69,7 +72,7 @@ function afficher() {
   document.getElementById("libres").textContent = 20 - occupes;
   document.getElementById("occupes").textContent = occupes;
   document.getElementById("chiffre").textContent = occupes * prix_siege;
-
+  enregister();
   remplirliste();
 }
 
@@ -102,7 +105,7 @@ formulaire1.addEventListener("submit", function (event) {
     siege: numero,
     nom: nomPassager
   });
-
+  
   afficher();
   alert("Réservation réussie !");
   formulaire1.reset();
@@ -170,3 +173,4 @@ afficher()
 alert("Modification réussie !")
 formModifier.reset()
 })
+afficher();
