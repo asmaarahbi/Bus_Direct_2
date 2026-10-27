@@ -125,7 +125,5 @@ padding: 10px 20px;
 .stats{
 display:flex;
 justify-content: space-between;
-background-color: #09339e;
-
-   
+background-color: rgb(91, 103, 170);
 }
