@@ -28,13 +28,13 @@ body{
 display: flex;
 gap: 10px;
 padding: 10px 20px;
-}
+ }
 
-.navbar span {
+ .navbar span {
     font-size: 21px;
     font-weight:bold;
     padding: 10px;;
-}
+  }
 
  .btn_nav{
     display: flex;
@@ -43,9 +43,37 @@ padding: 10px 20px;
     cursor: pointer;
     font-weight:bold;
     font-size:21px;
+  }
 
-    
- }
+
+  .section_statis{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 24px;
+    margin-top: 24px;
+  }
+    .statis{
+      background-color: white;
+      border-radius: 8px;
+      padding: 12px;
+      text-align:center;
+      box-shadow:cadetblue;
+    }
+    .statis_nbr{
+      font-size: 23px;
+      font-weight: bold;
+      color: grey;
+    }
+
+    .statis_nom{
+      font-size: 13px;
+      color: black;
+    }
+
+
+
+
  .formulaires {
     display: flex;
     gap: 0;
