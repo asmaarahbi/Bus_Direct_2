@@ -28,25 +28,27 @@
     </nav>
 <main>
     <!--section de statistiques-->
-<section class="section_statis" >
+<section class="conteneur" >
+    
     <div class ="statis " >
-        <p class="statis_nbr">0</p>
+        <p id="totalPassagers" class="statis_nbr">0</p>
         <p class="statis_nom">Passagers total</p>
     </div>
     <div class="statis">
-        <p class="statis_nbr">0 DH</p>
+        <p  id= "recetteReseau" class="statis_nbr">0 DH</p>
         <p class="statis_nom">Chiffre d'affaire</p>
     </div>
 </section>
+
 <section class="section_recherche">
-    <div class="barre_recherche">
+    <div class="filtres">
        <div>
         <label for="recherche" class="z_recherche"> Ville de départ ou Ville d'arrivée</label>
         <input type="text" id="recherche" class="champ_recherche" placeholder="EX: Tetouan">
        </div>
       
         <div>
-        <label for="filtrestatut" class="z_recherche">statut</label>
+        <label for="statut" class="z_recherche">statut</label>
         <select name="filtrestatut" id="z_recherche">
         <option value="tous">Tous</option>
         <option value="disponible">Disponible</option>
@@ -55,13 +57,12 @@
          </div>
 
     </div>
-
 </section>
 
 
     <div id="listeTrajets" class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"></div>
-
-
+    <div id="pagination"></div>
+</main>
  
 
 

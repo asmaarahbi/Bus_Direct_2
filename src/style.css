@@ -67,7 +67,9 @@ body{
       color: black;
     }
 
-   .section_recherche{
+   .barre_recherche{
+    display: flex;
+    flex-wrap:wrap ;
     background-color: white;
     border:1px solid rgb(209, 213, 219);
     border-radius:8px;
