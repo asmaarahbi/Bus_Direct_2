@@ -1,97 +1,38 @@
-import {init} from "./store.js"
-import { creationCarte } from "./render.js"
-import { estcomplet } from "./reservations.js";
+import {initialiser} from "./store.js"
+import { renderTrips,handleFiltrer} from "./render.js"
 
-const listes = document.querySelector("#listeTrajets")
-const pagination = document.querySelector("#pagination")
-const champRecherche = document.querySelector("#recherche")
+function calculerEtAffichierStats(tripsData){
+    let totalPassagers=0
+    let recette=0
+    tripsData.forEach((trip) => {
+        totalPassagers+=trip.reservations.length;
+        recette+=trip.reservations.length*trip.price;
 
-let trajet=[];
-let resultats=[];
-let page = 1;
-const champStatut=document.querySelector("#statut")
-
-function filtrer(){
-let texte= champRecherche.value.toLocaleLowerCase();
-let statut=champStatut.value;
-let resultats=[];
-let trajets=[];
-for(let i =0 ;i < trajets.length;i++){
-let trip = trajets[i]
-let trouville = false
-    if(trip.departure.toLocaleLowerCase().includes(texte)){
-        trouville=true;
-        }
-    if (trip.destination.toLocaleLowerCase().includes(texte)){
-        trouville=true;
-    } 
-    let statutok=true;
-    if(statut==="complet"&& estcomplet(trip)===false){
-        statutok=false
-    }
-    if(statut==="disponible"&& estcomplet(trip)===true){
-        statutok=false;
-    }
-    if (trouville===true && statutok===true){
-        resultats.push(trip);
-    }
-
-}
-page = 1 ;
-affichierCartes()
-affichierBoutton()
+        
+    });
+    const passagersElem = document.getElementById("totalPassagers");
+    const recetteElem = document.getElementById("recetteReseau");
+    if(passagersElem) passagersElem.textContent=totalPassagers;
+    if(recetteElem) recetteElem.textContent= recette + "DH";
 }
 
-
-function affichierCartes(){
-    listes.innerHTML="";
-    if(resultats.length===0){
-    listes.innerHTML="<p> Aucun trajet ne correspond</p>"
-    return
-    }
-
-    let debut = (page-1)*6;
-    let fin = debut + 6;
-    let index = resultats.slice(debut,fin);
+async function demarrer() {
+    const tripsData = await initialiser();
     
- for(let i =0 ; i<index.length; i++){
-    listes.innerHTML+=creationCarte(index[i])
- }
+    calculerEtAffichierStats(tripsData);
+    renderTrips(tripsData, 1, 6);
 
+    const rechercheInput = document.getElementById("recherche");
+    const statutSelect = document.getElementById("statut");
+
+    if (rechercheInput) {
+        rechercheInput.addEventListener("input", handleFiltrer);
+    }
+    if (statutSelect) {
+        statutSelect.addEventListener("change", handleFiltrer);
+    }
 }
 
-function affichierBoutton(){
-    let nombrePages = Math.ceil(resultats.length/6);
-    pagination.innerHTML="";
-    for( let i = 1 ; i<=nombrePages;i++) {
-        let classe = "";
-         if ( i === page){
-            classe = "active"
-         }
-        pagination.innerHTML+= `<button class="${classe}" data-page="${i}" >${i}</button>`;
-    }
+demarrer();
 
-}
 
-champRecherche.addEventListener("input",filtrer);
-champStatut.addEventListener("change",filtrer);
-pagination.addEventListener("click",function(e){
-    if(e.target.tagName==="BUTTON"){
-        page.Number(e.target.dataset.page)
-        affichierCartes()
-        affichierBoutton()
-    }
-
-});
-async function affichierTrajets() {
-    trajet=await init();
-    let totalPassagers= 0 ;
-    let recette = 0;
-    for(let i=0;i<trajet.length;i++){
-        totalPassagers+=trajet[i].reservations.length;
-         recette+= trajet[i].reservations.length*trajet.price;
-    }
-    document.querySelector("#totalPassagers").textContent=totalPassagers;
-    document.querySelector("#recetteReseau").textContent=recette+"DH";
-filtrer()      
-}

@@ -1,7 +1,9 @@
 export function placeLibres(trip){
-    return trip.capacity-trip.reservation.length;
+
+const reservationsCount=trip.reservations ?trip.reservations.length : 0;
+    return trip.capacity-reservationsCount;
 }
 
 export function estcomplet(trip){
-    return placeLibres(trip)===0;
-}
+    return placeLibres(trip)<=0 ;
+ }

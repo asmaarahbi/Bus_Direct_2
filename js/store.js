@@ -1,7 +1,16 @@
-export async function init() {
+
+export let trips=[];
+export async function initialiser() {
+    const localData= localStorage.getItem("trips")
+    if (localData){
+        trips=JSON.parse(localData);
+
+    }
+    else{
     const reponse = await fetch("./data/trips.json");
-    const trajets = await reponse.json();
-     localStorage.setItem("trips",JSON.stringify(trajets))
-     return trajets;
+    const trips= await reponse.json();
+    localStorage.setItem("trips",JSON.stringify(trips))
+    }
+     return trips;
     
 }

@@ -1,71 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BusDirect</title>
     <link rel="icon" type="image/png" href="/src/images/favicon_bus.png">
-    <link rel="stylesheet" href="/src/output.css">
-    <link rel="stylesheet" href="/src/style.css">
-</head>
-<body>
-    <!--trajets-->
-<header>
-    <nav class="navbar">
-        
-        <span>BusDirect</span>
-        
-        <div class="icon">
-         <button class="btn_nav">
-          Ticket 
-         </button>
-
-        <button class="btn_nav">
-
-            Profil
-        </button>
-        </div>
-    </nav>
-<main>
-    <!--section de statistiques-->
-<section class="conteneur" >
+    <!-- <link rel="stylesheet" href="./src/output.css">
+    <link rel="stylesheet" href="./src/style.css">
+    <link rel="stylesheet" href="./src/input.css"> -->
+    <script src="https://cdn.tailwindcss.com"></script>
     
-    <div class ="statis " >
-        <p id="totalPassagers" class="statis_nbr">0</p>
-        <p class="statis_nom">Passagers total</p>
-    </div>
-    <div class="statis">
-        <p  id= "recetteReseau" class="statis_nbr">0 DH</p>
-        <p class="statis_nom">Chiffre d'affaire</p>
-    </div>
-</section>
+</head>
+<body class="bg-gray-100 font-sans text-gray-800">
+    <header class="bg-blue-800 texte-white shadow">
+        <nav class="max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
+         <span class="text-2xl font-bold">BusDirect</span>
+            <a href="cabine.html" class="bg-blue-700 hover:bg-blue-800 px-4 py-2 rounded-lg text-sm font-semibold transition">
+             Sieges   
+            </a>
+        </nav>
+    </header>
+    <main class="max-w-6xl mx--auto px-4 py-8">
+        <!--section de statistiques-->
+        <section class="conteneur grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8" >
+    
+            <div class ="statis bg-white rounded-2xl shadow p-6 text-center" >
+                <p id="totalPassagers" class="statis_nbr text-3xl font-extrabold text-blue-600">0</p>
+                <p class="statis_nom text-gray-500">Passagers total</p>
+            </div>
+            <div class="statis statis bg-white rounded-2xl shadow p-6 text-center">
+                <p  id= "recetteReseau" class="statis_nbr text-3xl font-extrabold text-blue-600">0 DH</p>
+                <p class="statis_nom  text-gray-500">Chiffre d'affaire</p>
+            </div>
+        </section>
 
-<section class="section_recherche">
-    <div class="filtres">
-       <div>
-        <label for="recherche" class="z_recherche"> Ville de départ ou Ville d'arrivée</label>
-        <input type="text" id="recherche" class="champ_recherche" placeholder="EX: Tetouan">
-       </div>
+        <section class=" bg-white rounded-2xl shadaw p-6 mb-8">
+            <div class=" flex md: flex-row gap-4">
+                <div class="flex-1">
+                    <label for="recherche" class="block text-sm font-semibold text-gray-700 mb-1"> Ville de départ ou Ville d'arrivée</label>
+                    <input type="text" id="recherche" class=" w-full border border-gray-700 mb-1" placeholder="EX: Tetouan">
+                </div>
       
-        <div>
-        <label for="statut" class="z_recherche">statut</label>
-        <select name="filtrestatut" id="z_recherche">
-        <option value="tous">Tous</option>
-        <option value="disponible">Disponible</option>
-        <option value="complet">complet</option>
-        </select>
-         </div>
+                <div class="md:w-48">
+                    <label for="statut" class=" block text-sm font-semibold text-gray-700 mb-1">statut</label>
+                    <select id ="statut" class="w-full border border-gray-300 rounded-xl px-4 py-4 bg-white focus:ring-blue-500 ">
+                        <option value="tous">Tous</option>
+                        <option value="disponible">Disponible</option>
+                        <option value="complet">Complet</option>
+                    </select>
+                </div>
 
-    </div>
-</section>
-
-
-    <div id="listeTrajets" class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3"></div>
-    <div id="pagination"></div>
-</main>
- 
+            </div>
+        </section>
 
 
+        <div id="listeTrajets" class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+        <div id="pagination" class="flex justify-center gap-2 mt-8"></div>
+    </main>
 
     <script type="module" src="js/main-trajets.js"></script>
 </body>
