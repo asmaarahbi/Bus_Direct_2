@@ -1,3 +1,5 @@
+import { estVIP,prixSiege } from "./reservations.js";
+
 const prix_siege = 80;
 
 const formulaire1 = document.getElementById("formulaire1");
@@ -8,6 +10,7 @@ const formAnnuler = document.getElementById("formAnnuler");
 const passagerAnnuler = document.getElementById("passagerAnnuler");
 const passagerModifier =document.getElementById("passagerModifier");
 const siegeModifier = document.getElementById("siegeModifier");
+
 let reservations = [];
 const nouveauNom = document.getElementById("nouveauNom");
 
@@ -55,35 +58,41 @@ function remplirliste() {
 function afficher() {
   for (let i = 1; i <= 20; i++) {
     let div = document.querySelector('[data-seat="' + i + '"]');
-    div.classList.remove("bg-violet-300");
-    div.classList.add("bg-blue-800");
-
-    let numero = i;
-    if (i < 10) {
-      numero = "0" + i;
+    if (!div) continue ; 
+    const vip = estVIP(i);
+    div.className="siege p-3 rounded-xl text-center font-bold text-xs flex flex-col justify-center items-center shadow border";
+    if (vip){
+      div.classList.add("bg-yellow-600",text-black);
+    }else{
+      div.classList.add("bg-blue-800",text-white);
     }
-    div.innerHTML = "<b>" + numero + "</b><br>Libre";
+    let numero = i < 10 ? "0"+ i : i ;
+    }
+    div.innerHTML =`"<b>${ numero}</b>${vip ?'<span class="bg-yellow-300 text-yellow-900 px-1 rounded text-[9px] ml-1">VIP</span>' : ''}<br>Libre`;
   }
 
   for (let j = 0; j < reservations.length; j++) {
-    let div = document.querySelector('[data-seat="' + reservations[j].siege + '"]');
-    div.classList.remove("bg-blue-800");
-    div.classList.add("bg-violet-300");
-
-    let numero = reservations[j].siege;
-    if (numero < 10) {
-      numero = "0" + numero;
-    }
-    div.innerHTML = "<b>" + numero + "</b><br>" + reservations[j].nom;
-  }
+    let siegeNum = reservations[j].siege;
+    let div = document.querySelector('[data-seat="' + siegeNum + '"]');
+    if(!div) continue;
+    const vip = estVIP(siegeNum)
+   div.className = "p-3 rounded-xl text-center font-bold text-xs flex flex-col justify-center items-center shadow border bg-purple-600 text-white";
+    let numero =siegeNum<10 ? "0" + siegeNum : siegeNum;
+    
+    div.innerHTML = `"<b>${ numero}</b>${estVIP ?'<span class="bg-yellow-300 text-yellow-900 px-1 rounded text-[9px] ml-1">VIP</span>' : ''}<br>Libre`+ reservations[j].nom;
+  
 
   const occupes = reservations.length;
 
   document.getElementById("libres").textContent = 20 - occupes;
   document.getElementById("occupes").textContent = occupes;
-  document.getElementById("chiffre").textContent = occupes * prix_siege;
+  
+  const chiffreAffaires = reservations.reduce((total,r)=>{
+    return total + prixSiege(prix_siege,Number(r.siege))},0);
+  
+  document.getElementById("chiffre").textContent = chiffreAffaires;
   remplirliste();
-}
+  }
 
 // Partie réservation//
 formulaire1.addEventListener("submit", function (event) {
@@ -179,20 +188,18 @@ formModifier.addEventListener("submit", function (event) {
       reservations[i].siege=numero;
     } 
       
-  }
-  if(reservations[i].nom.toLowerCase()===nomNouveau.toLowerCase()){
-    alert("Nom déja existé , veuillez choisir un nouveau nom!")
-    return;
-  }
-  }
- 
-
   
+  }
+  }
  
+ enregister()
+ afficher() 
+
 
 
 alert("Modification réussie !")
 formModifier.reset()
 })
+
 getItem();
 afficher();
