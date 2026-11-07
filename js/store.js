@@ -1,9 +1,9 @@
 
 export let trips=[];
 export async function initialiser() {
-    const localData= localStorage.getItem("trips")
-    if (localData){
-        trips=JSON.parse(localData);
+    const donneeLocale= localStorage.getItem("trips")
+    if (donneeLocale){
+        trips=JSON.parse(donneeLocale);
 
     }
     else{
@@ -13,4 +13,7 @@ export async function initialiser() {
     }
      return trips;
     
+}
+export function sauvegarder(){
+    localStorage.setItem("trips",JSON.stringify(trips));
 }

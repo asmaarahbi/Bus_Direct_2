@@ -3,6 +3,7 @@ import { estcomplet, placeLibres } from "./reservations.js"
  
 export function renderTrips(modifierTrips,page,size){
     const conteneurListe= document.getElementById("listeTrajets")
+    const paginationHTML= document.getElementById("pagination")
     if(!conteneurListe) return ;
 
     conteneurListe.innerHTML="";
@@ -13,7 +14,7 @@ export function renderTrips(modifierTrips,page,size){
         <p class= "text-sm text-gray-500 mt-1>Aucun trajet ne correspond a votre recherche </p>
         </div>`;
         if(paginationHTML) paginationHTML.innerHTML="";
-        return
+        return;
     }
 
     const startIndex=(page -1)*size;
@@ -25,8 +26,8 @@ export function renderTrips(modifierTrips,page,size){
         card.className="bg-white rounded -xl p-6 shadow-sm border border-gray-200 flex flex-col justify-between"
         card.innerHTML= ` 
         <div>
-        <div class="flex justify-between items center mb-4>
-        <h2 class=text-lg-font-colf text-gray-800">${trip.departure} → ${trip.destination}</h2>
+        <div class="flex justify-between items center mb-4">
+        <h2 class="text-lg-font-bold  text-gray-800">${trip.departure} → ${trip.destination}</h2>
                     <span class="px-3 py-1 text-xs font-bold rounded-full ${isComplet ? "bg-red-100 text-red-600" : "bg-green-100 text-green-600"}">
                         ${isComplet ? "Complet" : "Disponible"}
                     </span>
@@ -51,29 +52,28 @@ export function renderTrips(modifierTrips,page,size){
     })
 renderPagination(safeTrips,page,size) 
 }
-export function handleFiltrer(){
-    const searchVille=document.getElementById("recherche")
-    const statutSelector= document.getElementById("satut")
-    const  city = searchVille ? searchVille.value.toLowerCase().trim():"";
-    const statut = statutSelector ? statutSelector.value :"tous";
-    
-    const filtrerTrips=trips.filter((trip)=>{
-        const departure =trip.departure ? trip.departure.toLowerCase() :"";
-        const destination =trip.destination ? trip.departure.toLowerCase() :"";
-       const matchCity = departure.includes(city) || destination.includes(city);
-        let matchStatut = false;
-        const complet = estcomplet(trip)
-        if (statut === "disponible") {
-            matchStatut = true;
-        } else if (statut === "complet") {
-            matchStatut = complet;
-        }
+export function handleFiltrer() {
+  const searchVille = document.getElementById("recherche");
+  const statutSelector = document.getElementById("statut");   
+  const city = searchVille ? searchVille.value.toLowerCase().trim() : "";
+  const statut = statutSelector ? statutSelector.value : "tous";
 
-        return matchCity && matchStatut;
-    });
+  const filtrerTrips = trips.filter((trip) => {
+    const departure = trip.departure.toLowerCase();
+    const destination = trip.destination.toLowerCase();   
+    const matchCity = departure.includes(city) || destination.includes(city);
 
-    renderTrips(filtrerTrips, 1, 6);
+    const complet = estcomplet(trip);
+    let matchStatut = true;                               
+    if (statut === "disponible") matchStatut = !complet; 
+    if (statut === "complet") matchStatut = complet;
+
+    return matchCity && matchStatut;
+  });
+
+  renderTrips(filtrerTrips, 1, 6);
 }
+
  export function renderPagination(modifierTrips,courantPage,pageSize){
     const paginationHTML = document.getElementById("pagination")
     if(!paginationHTML) return;
@@ -83,7 +83,7 @@ export function handleFiltrer(){
     if(totalPages <= 1) return;
     if (courantPage>1){
         const prevBtn =document.createElement("button")
-        prevBtn.ineerText="<";
+        prevBtn.innerText="<";
         prevBtn.className = "px-3 py-1.5 rounded-lg border bg-white text-gray-700 hover: bg-gray-100 font-semibold"
         prevBtn.addEventListener("click",()=> renderTrips(modifierTrips,courantPage -1,pageSize))
         paginationHTML.appendChild(prevBtn);

@@ -1,14 +1,17 @@
-const prix_siege = 80;
-
+import { initialiser,sauvegarder } from "./store.js";
+const param = new URLSearchParams (window.location.search);
+const idTrajet =Number(param.get("id"));
+let trajet= null;
+let reservations=[];
 const formulaire1 = document.getElementById("formulaire1");
 const namepassager = document.getElementById("nomReserver");
 const seatSelect = document.getElementById("siegeReserver");
-
+const formModifier = document.getElementById("formModifier")
 const formAnnuler = document.getElementById("formAnnuler");
 const passagerAnnuler = document.getElementById("passagerAnnuler");
 const passagerModifier =document.getElementById("passagerModifier");
 const siegeModifier = document.getElementById("siegeModifier");
-let reservations = [];
+
 const nouveauNom = document.getElementById("nouveauNom");
 
 function enregister(){
@@ -32,7 +35,7 @@ function remplirliste() {
     let occup = false;
 
     for (let j = 0; j < reservations.length; j++) {
-      if (reservations[j].siege === i) {
+      if (reservations[j].seat === i) {
         occup = true;
       }
     }
@@ -45,7 +48,7 @@ function remplirliste() {
 
 
   for (let j = 0; j < reservations.length; j++) {
-    const options= '<option value="' + reservations[j].nom + '">' + reservations[j].nom + "</option>";
+    const options= '<option value="' + reservations[j].name + '">' + reservations[j].name + "</option>";
     passagerModifier.innerHTML+=options;
     passagerAnnuler.innerHTML+=options;
   }
@@ -66,28 +69,37 @@ function afficher() {
   }
 
   for (let j = 0; j < reservations.length; j++) {
-    let div = document.querySelector('[data-seat="' + reservations[j].siege + '"]');
+    let div = document.querySelector('[data-seat="' + reservations[j].seat + '"]');
     div.classList.remove("bg-blue-800");
     div.classList.add("bg-violet-300");
 
-    let numero = reservations[j].siege;
+    let numero = reservations[j].seat;
     if (numero < 10) {
       numero = "0" + numero;
     }
-    div.innerHTML = "<b>" + numero + "</b><br>" + reservations[j].nom;
+    div.innerHTML = "<b>" + numero + "</b><br>" + reservations[j].name;
   }
 
   const occupes = reservations.length;
 
   document.getElementById("libres").textContent = 20 - occupes;
   document.getElementById("occupes").textContent = occupes;
-  document.getElementById("chiffre").textContent = occupes * prix_siege;
+  document.getElementById("chiffre").textContent = occupes * trajet.price;
   remplirliste();
 }
 
 // Partie réservation//
 formulaire1.addEventListener("submit", function (event) {
-  event.preventDefault();
+  event.prevent
+  
+  
+  
+  
+  
+  
+  
+  
+  Default();
 
   const nomPassager = namepassager.value.trim();
   let numero = Number(seatSelect.value);
@@ -103,19 +115,19 @@ formulaire1.addEventListener("submit", function (event) {
   }
 
   for (let i = 0; i < reservations.length; i++) {
-    if (reservations[i].nom.toLowerCase() === nomPassager.toLowerCase()) {
+    if (reservations[i].name.toLowerCase() === nomPassager.toLowerCase()) {
       alert("Ce nom existe déjà.");
       return;
     }
   }
 
   reservations.push({
-    siege: numero,
-    nom: nomPassager
+    seat: numero,
+    name: nomPassager
     
   });
 
-  enregister();
+  sauvegarder();
   afficher();
   alert("Réservation réussie !");
   formulaire1.reset();
@@ -135,23 +147,23 @@ formAnnuler.addEventListener("submit", function (event) {
   }
 
   for (let i = 0; i < reservations.length; i++) {
-    if (reservations[i].nom === nomChoisi) {
+    if (reservations[i].name === nomChoisi) {
       reservations.splice(i, 1);
     }
   }
-enregister();
+sauvegarder();
   afficher();
   alert("Réservation annulée !");
   formAnnuler.reset();
 });
 
 
-afficher();
+
 
 
 formModifier.addEventListener("submit", function (event) {
   event.preventDefault();
-
+console.log("from ,odifoer khdama")
   const ancienNom = passagerModifier.value;
   const nomNouveau = nouveauNom.value.trim();
   let numero = Number(siegeModifier.value);
@@ -171,18 +183,14 @@ formModifier.addEventListener("submit", function (event) {
 
   }
   for (let i = 0; i < reservations.length; i++) {
-    if (reservations[i].nom.toLowerCase() === ancienNom.toLowerCase()) {
+    if (reservations[i].name.toLowerCase() === ancienNom.toLowerCase()) {
       if(nomNouveau !==""){
-        reservations[i].nom = nomNouveau;
+        reservations[i].name = nomNouveau;
       }
     if(numero!== 0){
-      reservations[i].siege=numero;
+      reservations[i].seat=numero;
     } 
       
-  }
-  if(reservations[i].nom.toLowerCase()===nomNouveau.toLowerCase()){
-    alert("Nom déja existé , veuillez choisir un nouveau nom!")
-    return;
   }
   }
  
@@ -190,9 +198,22 @@ formModifier.addEventListener("submit", function (event) {
   
  
 
-
-alert("Modification réussie !")
-formModifier.reset()
-})
-getItem();
+sauvegarder();
 afficher();
+alert("Modification réussie !")
+formModifier.reset();
+})  
+async function demarrer() {
+  const tousLesTrajets = await initialiser();
+  trajet = tousLesTrajets.find((t) => t.id === idTrajet);
+
+  if (!trajet) {
+    alert("Trajet introuvable");
+    return;
+  }
+
+  reservations = trajet.reservations;   
+  afficher();
+}
+
+demarrer();
