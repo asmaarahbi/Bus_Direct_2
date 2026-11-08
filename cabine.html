@@ -1,48 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bus_direct</title>
+    <title>Bus_direct-Cabine</title>
     <link rel="icon" type="image/png" href="/src/images/favicon_bus.png">
-    <link rel="stylesheet" href="/src/style.css">
+    <link rel="stylesheet"a href="/src/style.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @keyframes gradientBG{
+  0% {background-position: 0% 50%;}
+  50% {background-position: 100% 50%;}d
+  100% {background-position: 0% 50%;}
+             
+        }
+        .animated-bg{
+            background: linear-gradient(-45deg, #1e3a8a, #2563eb, #3b82f6, #60a5fa);
+             background-size: 400% 400%; 
+            animation: gradientBG 12s ease infinite;}
+        </style>
 </head>
-<body>
-<header>
-    <nav class="navbar">
+<body class = "animated-bg min-h-screen font-sans text-gray-800">
+<header class = "bg-blue-900/80 backdrop-blur-md text-white shadow">
+    <nav class="max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
         
-        <span>BusDirect</span>
-        <div class="trajet">
-            <span>Safi→Marrakech</span>
-        </div>
-
-        <div class="icon">
-         <button class="btn_nav">
-          Ticket 
-         </button>
-
-        <button class="btn_nav">
-
-            Profil
-        </button>
-        </div>
-     
-    
+  <span class="text-2xl font-bold">BusDirect</span>
+    <a href="index.html" class="bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg text-sm font-semibold transition">
+     ← retour aux trajets
+   </a>
     </nav>
-    
-    <main>
-        <section class="bg-blue-950 text-white 
-                    flex justify-between items-center gap-5 ">
+</header>
 
-        <div class="flex flex-wrap items-center gap-4">
-            <span class="font-bold">Safi → Marrakech</span>
-            <span>
-                80 DH / place
-            </span>
+    
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <section class="bg-white rounded-2xl shadow p-6 mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+
+        <div>
+       <h1 id="trajetTitre" class="text-2xl font-extrabold text-gray-800">...</h1>
+       <p id="trajetTitre" class="text-blue-600 font-bold mt-1">...</p>
         </div>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-5 text-sm text-gray-600">
 
     <div class="flex items-center gap-2">
     <span class="w-4 h-4 rounded-full bg-blue-400"></span>
@@ -53,107 +51,128 @@
     <span class="w-4 h-4 rounded-full bg-purple-400"></span>
     <span>Occupé</span>
      </div>
-
+ 
     <div class = "flex items-center gap-2">
-      <span class="w-4 h-4 rounded-full bg-yellow-700"></span>
+      <span class="w-4 h-4 rounded-full bg-yellow-500"></span>
       <span >VIP</span>
 
     </div>
     </div>
     </section>
 
-
-<section class="formulaires" >
-
-  <form class="carte bg-blue-950 text-white border-blue-500" id="formulaire1">
-    <h2>Réserver une place</h2>
-
-    <label>Passager</label>
-    <input class="champ bg-blue-900 text-white" type="text" id="nomReserver" placeholder="Ex : asmaa rahbi">
-
-    <label>Siège sélectionne</label>
-    <select class="champ bg-blue-900 text-white" id="siegeReserver">
-      <option value="">-- Choisir un siège --</option>
-    </select>
-
-    <button class="bouton bg-blue-600 text-white" type="submit">Confirmer</button>
-  </form>
-
-  <form class="carte bg-blue-950 text-white border-blue-500" id="formModifier">
-    <h2>Modifier une place</h2>
-
-    <label>Passager existant</label>
-    <select class="champ bg-blue-900 text-white" id="passagerModifier">
-    <option value="">-- Choisir un passager --</option>
-    </select>
-
-    <label>Nouveau nom</label>
-    <input class="champ bg-blue-900 text-white" type="text" id="nouveauNom">
-    <label>Siège sélectionné</label>
-     <select class="champ bg-blue-900 text-white" id="siegeModifier">
-      <option value="">-- Choisir un siège --</option>
-    </select>
-
-    <button class="bouton bg-blue-600 text-white" type="submit">Modifier</button>
-  </form>
-
-  <form class="carte bg-blue-950 text-white border-blue-500" id="formAnnuler">
-    <h2>Annuler une réservation</h2>
-
-    <label>Passager</label>
-    <select class="champ bg-blue-900 text-white" id="passagerAnnuler">
-    <option value="">-- Choisir un passager --</option>
-    </select>
-
-    <button class="bouton bg-red-600 text-white" type="submit">Annuler</button>
-  </form>
-
-</section>
-
-<section class="bus bg-blue-950  text-white">
- 
-  <div class="sieges">
-  <div class="siege bg-blue-800" data-seat="1"><b>01</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="2"><b>02</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="3"><b>03</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="4"><b>04</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="5"><b>05</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="6"><b>06</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="7"><b>07</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="8"><b>08</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="9"><b>09</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="10"><b>10</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="11"><b>11</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="12"><b>12</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="13"><b>13</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="14"><b>14</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="15"><b>15</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="16"><b>16</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="17"><b>17</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="18"><b>18</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="19"><b>19</b><br>Libre</div>
-  <div class="siege bg-blue-800" data-seat="20"><b>20</b><br>Libre</div>
+<!--statistiques-->
+<section class="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+  <div class="bg-white rounded-2xl shadow p-6 text-center">
+    <p id="total" class="text-3xl font-extrabold text-blue-600">20</p>
+    <p class="text-gray-500">Total</p>
+  </div>
+    <div class="bg-white rounded-2xl shadow p-6 text-center">
+    <p id="libres" class="text-3xl font-extrabold text-blue-600">20</p>
+    <p class="text-gray-500">libres</p>
+  </div>
+    <div class="bg-white rounded-2xl shadow p-6 text-center">
+    <p id="occupes" class="text-3xl font-extrabold text-blue-600">0</p>
+    <p class="text-gray-500">Occupés</p>
+  </div>
+    <div class="bg-white rounded-2xl shadow p-6 text-center">
+    <p  class="text-3xl font-extrabold text-blue-600"><span id=" chiffre">0</span>DH</p>
+    <p class="text-gray-500">Chiffre d'affaires</p>
   </div>
 </section>
-       
-    </main>
 
-<footer>
-    <div class="stats ">
-  <div class="boite text-black">
-   <b> Total : </b><span id="total">20</span>
-  </div>
-  <div class="boite text-black ">
-    <b>Libres :</b> <span id="libres">20</span>
-  </div>
-  <div class="boite text-black">
-    <b>Occupés : </b><span id="occupes">0</span>
-  </div>
-  <div class="boite text-black">
-    <b>Chiffre d'affaires : </b><span id="chiffre">0</span> DH
-  </div>
+<!--formulaire-->
+<section class=" grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8" >
+
+  <form class="bg-white rounded-2xl shadow p-6 flex flex-col gap-3" id="formulaire1">
+    <h2 class="text-lg font-bold text-gray-800">Réserver une place</h2>
+
+    <label class="text-sm font-semibold text-gray-700">Passager</label>
+    <input class="w-full border border-gray-300 rounded-xl px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 " type="text" id="nomReserver" placeholder="Ex : asmaa rahbi">
+
+    <label class="text-sm font-semibold text-gray-700">Siège sélectionne</label>
+    <select class="w-full border border-gray-300 rounded-xl px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 " id="siegeReserver">
+      <option value="">-- Choisir un siège --</option>
+    </select>
+<button type="submit"
+ class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl transition mt-2">
+ Confirmer</button>
+</form>
+
+<form id="formModifier" class="bg-white rounded-2xl shadow p-6 flex flex-col gap-3">
+    <h2 class="text-lg font-bold text-gray-800">Modifier une place</h2>
+
+    <label class="text-sm font-semibold text-gray-700">Passager existant</label>
+    <select id="passagerModifier"
+        class="w-full border border-gray-300 rounded-xl px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">-- Choisir un passager --</option>
+    </select>
+
+    <label class="text-sm font-semibold text-gray-700">Nouveau nom</label>
+    <input type="text" id="nouveauNom"
+        class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+
+    <label class="text-sm font-semibold text-gray-700">Nouveau siège</label>
+    <select id="siegeModifier"
+        class="w-full border border-gray-300 rounded-xl px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">-- Choisir un siège --</option>
+    </select>
+
+    <button type="submit"
+        class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl transition mt-2">
+        Modifier
+    </button>
+</form>
+
+<form id="formAnnuler" class="bg-white rounded-2xl shadow p-6 flex flex-col gap-3">
+    <h2 class="text-lg font-bold text-gray-800">Annuler une réservation</h2>
+
+    <label class="text-sm font-semibold text-gray-700">Passager</label>
+    <select id="passagerAnnuler"
+        class="w-full border border-gray-300 rounded-xl px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <option value="">-- Choisir un passager --</option>
+    </select>
+
+    <button type="submit"
+        class="bg-red-600 hover:bg-red-700 text-white font-semibold px-4 py-2 rounded-xl transition mt-2">
+        Annuler
+    </button>
+</form>
+</section>
+
+<!-- Le bus -->
+<section class="bg-white rounded-2xl shadow p-6">
+<h2 class="text-lg font-bold text-gray-800 mb-4">Plan du bus</h2>
+
+<div class="grid grid-cols-4 sm:grid-cols-5 gap-3">
+    <!-- 20 sièges : colle ici tes 20 div (Step 2) -->
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="1"><b>01</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="2"><b>02</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="3"><b>03</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="4"><b>04</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="5"><b>05</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="6"><b>06</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="7"><b>07</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="8"><b>08</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="9"><b>09</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="10"><b>10</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="11"><b>11</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="12"><b>12</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="13"><b>13</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="14"><b>14</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="15"><b>15</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="16"><b>16</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="17"><b>17</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="18"><b>18</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="19"><b>19</b><br>Libre</div>
+  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="20"><b>20</b><br>Libre</div>
 </div>
-</footer>
+</section>
+
+</main>
+
+<script type="module" src="js/main-cabine.js"></script>
+</body>
+</html>
 
 
 <script type="module" src="js/main-cabine.js"></script>
