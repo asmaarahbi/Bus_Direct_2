@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bus_direct-Cabine</title>
     <link rel="icon" type="image/png" href="/src/images/favicon_bus.png">
-    <link rel="stylesheet"a href="/src/style.css">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @keyframes gradientBG{
   0% {background-position: 0% 50%;}
-  50% {background-position: 100% 50%;}d
+  50% {background-position: 100% 50%;}
   100% {background-position: 0% 50%;}
              
         }
@@ -33,11 +33,12 @@
 
     
     <main class="max-w-7xl mx-auto px-4 py-8">
+      <div id="message" class="hidden"></div>
         <section class="bg-white rounded-2xl shadow p-6 mb-8 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
         <div>
        <h1 id="trajetTitre" class="text-2xl font-extrabold text-gray-800">...</h1>
-       <p id="trajetTitre" class="text-blue-600 font-bold mt-1">...</p>
+       <p id="trajetPrix" class="text-blue-600 font-bold mt-1">...</p>
         </div>
 
     <div class="flex items-center gap-5 text-sm text-gray-600">
@@ -75,7 +76,7 @@
     <p class="text-gray-500">Occupés</p>
   </div>
     <div class="bg-white rounded-2xl shadow p-6 text-center">
-    <p  class="text-3xl font-extrabold text-blue-600"><span id=" chiffre">0</span>DH</p>
+    <p  class="text-3xl font-extrabold text-blue-600"><span id="chiffre">0</span>DH</p>
     <p class="text-gray-500">Chiffre d'affaires</p>
   </div>
 </section>
@@ -93,11 +94,9 @@
     <select class="w-full border border-gray-300 rounded-xl px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 " id="siegeReserver">
       <option value="">-- Choisir un siège --</option>
     </select>
-<button type="submit"
- class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl transition mt-2">
- Confirmer</button>
+<button type="submit" id = "btnReserver" class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl transition mt-2">Confirmer</button>
 </form>
-
+<!--modif-->
 <form id="formModifier" class="bg-white rounded-2xl shadow p-6 flex flex-col gap-3">
     <h2 class="text-lg font-bold text-gray-800">Modifier une place</h2>
 
@@ -139,33 +138,33 @@
 </form>
 </section>
 
+
 <!-- Le bus -->
 <section class="bg-white rounded-2xl shadow p-6">
 <h2 class="text-lg font-bold text-gray-800 mb-4">Plan du bus</h2>
 
-<div class="grid grid-cols-4 sm:grid-cols-5 gap-3">
-    <!-- 20 sièges : colle ici tes 20 div (Step 2) -->
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="1"><b>01</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="2"><b>02</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="3"><b>03</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="4"><b>04</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="5"><b>05</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="6"><b>06</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="7"><b>07</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="8"><b>08</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="9"><b>09</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="10"><b>10</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="11"><b>11</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="12"><b>12</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="13"><b>13</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="14"><b>14</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="15"><b>15</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="16"><b>16</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="17"><b>17</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="18"><b>18</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="19"><b>19</b><br>Libre</div>
-  <div .class="rounded-lg p-3 text-center text-sm text-white bg-blue-800" data-seat="20"><b>20</b><br>Libre</div>
-</div>
+<div id="bus" class="grid grid-cols-4 sm:grid-cols-5 gap-3">
+   </div> 
+</section>
+
+
+<!--form attente -->
+<section class="bg-white rounded-2xl shadow p-6 mt-8">
+<h2 class="text-lg font-bold text-gray-800 mb-4">
+Liste d’attente (<span id="nbAttente">0</span>)
+</h2>
+
+<form id="formAttente" class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
+<input type="text" id="nomAttente" placeholder="Nom du passager"
+  class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+<input type="text" id="telAttente" placeholder="Téléphone (ex : 0612345678)"
+  class="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+<button type="submit"
+  class="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-xl transition">
+  Ajouter à la liste
+</button>
+</form>
+<ul id="listeAttente"></ul>
 </section>
 
 </main>
@@ -175,8 +174,3 @@
 </html>
 
 
-<script type="module" src="js/main-cabine.js"></script>
-
-</body>
-
-</html>
