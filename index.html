@@ -1,12 +1,71 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BusDirect</title>
-</head>
-<body>
-    <!--trajets-->
-    <script type="module" src="js/main-trajets.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BusDirect</title>
+<link rel="icon" type="image/png" href="/src/images/favicon_bus.png">
+<!-- <link rel="stylesheet" href="./src/output.css">
+<link rel="stylesheet" href="./src/style.css">
+<link rel="stylesheet" href="./src/input.css"> -->
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+@keyframes gradientBG{
+0% {background-position: 0% 50%;}
+50% {background-position: 100% 50%;}d
+100% {background-position: 0% 50%;}
+
+}
+.animated-bg{
+background: linear-gradient(-45deg, #1e3a8a, #2563eb, #3b82f6, #60a5fa);
+background-size: 400% 400%; 
+animation: gradientBG 12s ease infinite;}
+</style>
+<body class= " animated-bg min-h-screen font-sans text-gray-800">
+<header class="bg-blue-900/80 backdrop-blur-md text-white shadow">
+<nav class="max-w-7xl mx-auto flex justify-between items-center px-4 py-4">
+<span class="text-2xl font-bold">BusDirect</span>
+</nav>
+</header>
+<main class="max-w-7xl mx-auto px-4 py-8">
+<!--section de statistiques-->
+<section class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8" >
+
+<div class =" bg-white rounded-2xl shadow p-6 text-center" >
+<p id="totalPassagers" class=" text-3xl font-extrabold text-blue-600">0</p>
+<p class=" text-gray-500">Passagers total</p>
+</div>
+<div class=" bg-white rounded-2xl shadow p-6 text-center">
+<p  id= "recetteReseau" class=" text-3xl font-extrabold text-blue-600">0 DH</p>
+<p class=" text-gray-500">Chiffre d'affaire</p>
+</div>
+</section>
+<!--section recherche et statut-->
+<section class=" bg-white rounded-2xl shadaw p-6 mb-8">
+<div class=" flex  flex-col md:flex-row gap-4 items-end">
+<!--input recherche-->
+<div class="flex-1 w-full">
+<label for="recherche" class="block text-sm font-semibold text-gray-700 mb-2"> Ville de départ ou Ville d'arrivée</label>
+<div class="relative"><input type="text" id="recherche" class=" w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="EX: Tetouan">
+</div> </div>
+<!--selectionner le statut -->
+<div class=" w-full md:w-64">
+<label for="statut" class=" block text-sm font-semibold text-gray-700 mb-1">statut</label>
+<select id ="statut" class="w-full border border-gray-300 rounded-xl px-4 py-2 bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">
+<option value="tous">Tous</option>
+<option value="disponible">Disponible</option>
+<option value="complet">Complet</option>
+</select>
+</div>
+
+</div>
+</section>
+
+
+<div id="listeTrajets" class=" grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+<div id="pagination" class="flex justify-center gap-2 mt-10"></div>
+</main>
+
+<script type="module" src="js/main-trajets.js"></script>
 </body>
 </html>
